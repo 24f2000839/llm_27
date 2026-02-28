@@ -1,0 +1,36 @@
+name: Daily DevSync Update - 24f2000839@ds.study.iitm.ac.in
+run-name: Daily DevSync Update - 24f2000839@ds.study.iitm.ac.in
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "30 10 * * *"   # Runs once per day at 10:30 UTC
+  workflow_dispatch:
+
+jobs:
+  update-repo:
+    name: Update Repo - 24f2000839@ds.study.iitm.ac.in
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository - 24f2000839@ds.study.iitm.ac.in
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Configure Git - 24f2000839@ds.study.iitm.ac.in
+        run: |
+          git config user.name "github-actions"
+          git config user.email "24f2000839@ds.study.iitm.ac.in"
+
+      - name: Create daily update file
+        run: |
+          echo "Last update: $(date -u)" > daily_update.txt
+
+      - name: Commit and Push - 24f2000839@ds.study.iitm.ac.in
+        run: |
+          git add daily_update.txt
+          git commit -m "Automated daily update - 24f2000839@ds.study.iitm.ac.in"
+          git push
